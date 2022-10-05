@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Write your code to fire a projectile here...
+            GameObject projectile = ObjectPool.SharedInstance.GetPooledObject("Projectile");
+            if (projectile != null) { 
+                projectile.transform.position = gameObject.transform.position;
+                projectile.SetActive(true);
+            }
+            
         }
     }
 }
+  
