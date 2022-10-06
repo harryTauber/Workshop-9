@@ -5,8 +5,9 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;
-    [SerializeField] private int damage=50;
-     [SerializeField] private string tagToDamage;
+    [SerializeField] private int damage;
+    [SerializeField] private string tagToDamage;
+    [SerializeField] private string explosionTag;
      //[SerializeField] private ParticleSystem collisionParticles;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class ProjectileController : MonoBehaviour
             var healthManager = col.gameObject.GetComponent<HealthManager>();
             healthManager.ApplyDamage(this.damage);
             
-            GameObject particles = ObjectPool.SharedInstance.GetPooledObject("Projectile Explosion");
+            GameObject particles = ObjectPool.SharedInstance.GetPooledObject(explosionTag);
             if (particles != null) {
                 particles.transform.position = gameObject.transform.position;
                 particles.transform.rotation =  Quaternion.LookRotation(-this.velocity);
