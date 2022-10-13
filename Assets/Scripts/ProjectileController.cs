@@ -8,17 +8,14 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private string tagToDamage;
     [SerializeField] private string explosionTag;
+
+    private Rigidbody _rigidbody;
      //[SerializeField] private ParticleSystem collisionParticles;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Translate(this.velocity * Time.deltaTime);
+        this._rigidbody = GetComponent<Rigidbody>();
+        this._rigidbody.velocity = this.velocity;
     }
 
     void OnTriggerEnter(Collider col) {
@@ -39,6 +36,11 @@ public class ProjectileController : MonoBehaviour
             // Destroy self.
             gameObject.SetActive(false);
         }
+    }
+
+    public void SetVelocity(Vector3 velocity)
+    {
+        this._rigidbody.velocity = velocity;
     }
 }
 

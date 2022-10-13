@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class LookRotation : MonoBehaviour
 {
-    [SerializeField] private Vector3 _forward;
-    private Vector3 Forward
-    {
-        get => this._forward;
-        set {
-            this._forward = value;
-        }
-    }
+    [SerializeField] private Vector3 forward = Vector3.forward;
+   
+    private Rigidbody _rigidbody;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        this._rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 relativePos = target.position - transform.position;
+       // Vector3 relativePos = target.position - transform.position;
 
         // the second argument, upwards, defaults to Vector3.up
-        Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-        transform.rotation = rotation;
+        //Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
+        //transform.rotation = rotation;
+    }
+
+    public void SetLookDirection(Vector3 forward) {
+        this.forward = forward;
     }
 }
